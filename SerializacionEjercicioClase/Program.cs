@@ -14,7 +14,7 @@ namespace SerializacionEjercicioClase
             bool exec = true;
             while (exec)
             {
-                string chosen = ShowOptions(new List<string>() { "Crear persona", "Ver personas registradas", "Almacenar", "Cargar" });
+                string chosen = ShowOptions(new List<string>() { "Crear persona", "Ver personas registradas", "Almacenar", "Cargar", "Salir" });
                 switch (chosen)
                 {
                     case "Crear persona":
@@ -33,17 +33,23 @@ namespace SerializacionEjercicioClase
                         break;
                     case "Almacenar":
                         Console.Clear();
-                        IFormatter formatter = new BinaryFormatter();
-                        Stream stream = new FileStream("ArchivoPersona.bin", FileMode.Create, FileAccess.Write, FileShare.None);
-                        formatter.Serialize(stream, persona);
-                        stream.Close();
+                        foreach(Persona p in persona.listapersona)
+                        {
+                            IFormatter formatter = new BinaryFormatter();
+                            Stream stream = new FileStream("MyFile.bin", FileMode.Create, FileAccess.Write, FileShare.None);
+                            formatter.Serialize(stream, p);
+                            stream.Close();
+                        }
                         break;
                     case "Cargar":
                         Console.Clear();
-                        IFormatter formatter = new BinaryFormatter();
-                        Stream stream = new FileStream("ArchivoPersona.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
-                        Persona persona = (Persona)formatter.Deserialize(stream);
-                        stream.Close();
+                        foreach (Persona p in persona.listapersona)
+                        { 
+                            IFormatter formatter = new BinaryFormatter();
+                            Stream stream = new FileStream("MyFile.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
+                            Persona persona1 = (Persona)formatter.Deserialize(stream);
+                            stream.Close();
+                        }
                         break;
                     case "Salir":
                         exec = false;

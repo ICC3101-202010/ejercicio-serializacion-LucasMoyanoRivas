@@ -3,13 +3,13 @@ using System.Runtime.Serialization;
 using System.Collections.Generic;
 namespace SerializacionEjercicioClase
 {
-    [Serializable()]
+    [Serializable]
     public class Persona
     {
         private string nombre;
         private string apellido;
         private int edad;
-        private List<Persona> listapersona = new List<Persona>();
+        public List<Persona> listapersona = new List<Persona>();
         public Persona(string nombre, string apellido, int edad)
         {
             this.nombre = nombre;
